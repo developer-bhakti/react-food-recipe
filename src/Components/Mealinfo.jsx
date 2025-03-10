@@ -20,21 +20,22 @@ const Mealinfo = () => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="m-10 border p-10 rounded-2xl bg-blue-100">
       {!info ? (
         "Data Not Found"
       ) : (
-        <div className="h-screen m-50 flex flex-col">
-          <img className="mr-7 ml-7 mt-7 mb-7 border" src={info.strMealThumb} />
-          <div>
-            <h1 className="text-center font-bold">Recipe Detail</h1>
-            <button className=" bg-orange-600 text-white py-2 px-4 rounded-2xl border">
-              {info.strMeal}
-            </button>
-            <h3 className="font-medium text-center mb-4">Instructions</h3>
-            <p className="flex justify-center text-center items-center">
-              {info.strInstructions}
-            </p>
+        <div className="flex md:flex-row flex-col justify-center items-center gap-10">
+          <img className="w-96 h-96 rounded-2xl" src={info.strMealThumb} />
+          <div className="flex flex-col items-center md:items-start justify-center md:-mt-40">
+            <h1 className=" font-bold text-4xl my-4">
+              Recipe Detail For :{" "}
+              <span className="text-orange-600"> {info.strMeal}</span>
+            </h1>
+            {/* <button className="my-5 bg-orange-600 text-white py-2 px-4 rounded-2xl border">
+             
+            </button> */}
+            <h3 className="font-medium  mb-4 text-3xl">Instructions</h3>
+            <p className="text-2xl">{info.strInstructions}</p>
           </div>
         </div>
       )}

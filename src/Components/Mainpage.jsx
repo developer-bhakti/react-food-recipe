@@ -3,24 +3,31 @@ import Mealcards from "./Mealcards";
 
 const Mainpage = () => {
   const [data, setData] = useState();
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
+  const [msg, setMsg] = useState("");
 
   const handleInput = (event) => {
     setSearch(event.target.value);
   }
 
   const myFun = async () => {
-    const get = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
-    );
-    const jsonData = await get.json();
-    // console.log(jsonData.meals);
-    setData(jsonData.meals);
-  };
-//   console.log(data);
+    if(search == ""){
+     setMsg("Please Enter Someting");
+    } else {
+        const get = await fetch(
+            `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
+          );
+          const jsonData = await get.json();
+          setData(jsonData.meals);
+          setMsg("");
+    }
+ 
+  }
+
 
   return (
     <>
+    <h1 className="text-center">FOOD RECIPE APP</h1>
       <div>
         <div className="flex justify-center mt-5">
           <input
@@ -30,12 +37,13 @@ const Mainpage = () => {
             onChange={handleInput}
           />
           <button
-            className="border-2 py-2 px-4 rounded-sm bg-amber-500 text-white"
+            className="border-2 py-2 px-4 rounded-sm bg-amber-500 text-white items-center "
             onClick={myFun}
           >
             Search
           </button>
         </div>
+        <h4 className="text-center mt-4 text-red-600">{msg}</h4>
         <div>
             <Mealcards detail={data}/>
         </div>
